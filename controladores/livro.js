@@ -17,6 +17,23 @@ function getLivros(req, res) {
   }
 }
 
+function getLivro(req, res) {
+  try {
+    const id = req.params.id;
+
+    if (id && Number(id)) {
+      const livro = getLivroPorId(id);
+      res.send(livro);
+    } else {
+      res.status(422);
+      res.send("Id inválido");
+    }
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+}
+
 function postLivro(req, res) {
   try {
     const livroNovo = req.body;
